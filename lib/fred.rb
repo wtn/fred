@@ -1,17 +1,7 @@
-# Fred
-require 'rubygems'
-gem 'httparty'
-require 'httparty'
-require 'hashie'
-
-directory = File.expand_path(File.dirname(__FILE__))
-
-Hash.send :include, Hashie::HashExtensions
-
 module Fred
-  
+
   # create config/initializers/fred.rb
-  # 
+  #
   # Fred.configure do |config|
   #   config.api_key = 'api_key'
   # end
@@ -23,8 +13,8 @@ module Fred
   #
   # or
   #
-  # Fred::Client.new(:api_key => 'api_key')
-  
+  # Fred::Client.new(api_key: 'api_key')
+
   def self.configure
     yield self
     true
@@ -33,7 +23,8 @@ module Fred
   class << self
     attr_accessor :api_key
   end
-  
+
 end
 
-require File.join(directory, 'fred', 'client')
+require_relative 'fred/client'
+require_relative 'fred/version'
