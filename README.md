@@ -18,6 +18,11 @@ Sign up for a FRED API key: [https://api.stlouisfed.org/api_key.html](https://ap
 
     fred = Fred::Client.new(api_key: 'your_api_key')
 
+### or set FRED_API_KEY in your environment
+
+    export FRED_API_KEY=your_api_key
+    fred = Fred::Client.new
+
 ### or configure once
 
     Fred.configure do |config|

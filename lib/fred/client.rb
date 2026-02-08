@@ -15,7 +15,7 @@ module Fred
     attr_reader :api_key
 
     def initialize(options = {})
-      @api_key = options[:api_key] || Fred.api_key
+      @api_key = options[:api_key] || Fred.api_key || ENV['FRED_API_KEY']
     end
 
     def category(secondary, options = {})

@@ -65,4 +65,14 @@ class FredTest < Minitest::Test
 
   end
 
+  context 'API key from environment' do
+    should 'read FRED_API_KEY when no key is passed' do
+      ENV['FRED_API_KEY'] = 'env-key'
+      client = Fred::Client.new
+      assert_equal 'env-key', client.api_key
+    ensure
+      ENV.delete 'FRED_API_KEY'
+    end
+  end
+
 end
