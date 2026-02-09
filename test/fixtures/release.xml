@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<releases realtime_start="2008-07-28" realtime_end="2008-07-28">
-  <release id="53" realtime_start="2008-07-28" realtime_end="2008-07-28" name="Gross Domestic Product" press_release="true" link="http://www.bea.gov/national/index.htm"/>
+<releases realtime_start="2026-02-08" realtime_end="2026-02-08">
+  <release id="53" realtime_start="2026-02-08" realtime_end="2026-02-08" name="Gross Domestic Product" press_release="true" link="https://www.bea.gov/data/gdp/gross-domestic-product"/>
 </releases>

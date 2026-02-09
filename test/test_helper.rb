@@ -1,37 +1,19 @@
-require 'test/unit'
-require 'pathname'
-require 'rubygems'
-
-require 'shoulda'
-require 'matchy'
-require 'fakeweb'
-
-begin require 'redgreen'; rescue LoadError; end
-
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+require 'minitest/autorun'
+require 'minitest/mock'
+require 'shoulda-context'
+require 'multi_xml'
 require 'fred'
 
-# Set the default allow_net_connect option--usually you'll want this off.
-# You don't usually want your test suite to make HTTP connections, do you?
-
-FakeWeb.allow_net_connect = false
-
-class Test::Unit::TestCase
-end
-
 def fixture_file(filename)
-  return '' if filename == ''
-  file_path = File.expand_path(File.dirname(__FILE__) + '/fixtures/' + filename)
+  return '' if filename.empty?
+  file_path = File.expand_path(File.join('fixtures', filename), __dir__)
   File.read(file_path)
 end
 
-def fred_url(url, options={})
-  url =~ /^http/ ? url : "http://api.stlouisfed.org/fred#{url}"
-end
+FakeResponse = Struct.new(:code, :parsed_response)
 
-def stub_get(url, filename, options={})
-  opts = {:body => fixture_file(filename)}.merge(options)
-
-  FakeWeb.register_uri(:get, fred_url(url), opts)
+def stub_request(fixture_filename)
+  parsed = MultiXml.parse(fixture_file(fixture_filename))
+  response = FakeResponse.new(200, parsed)
+  ->(_path, _options = {}) { response }
 end
